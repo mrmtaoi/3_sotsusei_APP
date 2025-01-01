@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root 'static_pages#top'
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+  
+  # ログイン前後で異なるトップページを表示
+  root 'application#top'
+
+  # その他のルート
+  get 'signup', to: 'users#new'
+  get 'static_pages/top', to: 'static_pages#top'
+  get 'static_pages/welcome', to: 'static_pages#welcome'
 end
