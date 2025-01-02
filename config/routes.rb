@@ -12,4 +12,13 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'static_pages/top', to: 'static_pages#top'
   get 'static_pages/welcome', to: 'static_pages#welcome'
+
+  namespace :stocks do
+    resources :stocks
+    resources :emergency_kits do
+      collection do
+        get 'all'  # 'stocks/emergency_kits/all' のパスを設定
+      end
+    end
+  end
 end

@@ -1,0 +1,13 @@
+<!-- app/views/stocks/stocks/index.html.erb -->
+<h1>現在の備え一覧</h1>
+
+<% if @stocks.present? %>
+  <ul>
+    <% @stocks.each do |stock| %>
+      <li><%= stock.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>備蓄は何もありません...</p>
+  <%= image_tag 'nostock.png', style: 'width: 500px; height: 500px; position: absolute; top: 300px; left: 500px;' %>
+<% end %>
