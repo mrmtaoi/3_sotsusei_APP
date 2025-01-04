@@ -1,6 +1,6 @@
 class Stocks::EmergencyKitsController < ApplicationController
   def index
-    @stocks = EmergencyKit.all
+    @emergency_kits = EmergencyKit.where(user: current_user) # ユーザーの防災バッグを取得
   end
 
   def show
@@ -14,34 +14,39 @@ class Stocks::EmergencyKitsController < ApplicationController
   end
 
 def create
+  user = current_user
   gender = EmergencyKitsOwner.genders.key(emergency_kit_params[:gender])
 
-  # EmergencyKitsOwner を作成または取得
-  owner = EmergencyKitsOwner.find_or_create_by(user_id: current_user.id, name: emergency_kit_params[:owner_name])
-  owner.update(age: emergency_kit_params[:age], gender: gender) if owner.persisted?
+      # パラメータを使用してオーナー情報を取得または作成
+      owner = EmergencyKitsOwner.find_or_create_by(
+        user_id: current_user.id,
+        name: emergency_kit_params[:owner_name],
+        age: emergency_kit_params[:age],
+        gender: emergency_kit_params[:gender]
+      )
 
   # デバッグログ
   logger.debug("EmergencyKitsOwner existence: #{EmergencyKitsOwner.exists?(id: owner.id)}")
   logger.debug("Owner: #{owner.inspect}")
+  logger.debug("Gender: #{gender}")
 
-  # EmergencyKit を作成
-  @emergency_kit = EmergencyKit.new(
-    owner_id: owner.id,
-    user_id: current_user.id,
-    storage: emergency_kit_params[:storage]
-  )
 
-  # Reminder を初期化
-  @emergency_kit.build_reminder(emergency_kit_params.dig(:reminder_attributes)) if @emergency_kit.reminder.nil?
+    # EmergencyKit の作成
+    @emergency_kit = EmergencyKit.new(
+      user: user,
+      owner: owner,
+      body: emergency_kit_params[:body],
+      storage: emergency_kit_params[:storage]
+    )
 
-  if @emergency_kit.save
-    redirect_to stocks_emergency_kits_path, notice: "防災バッグが登録されました！"
-  else
-    logger.debug("Errors: #{@emergency_kit.errors.full_messages}")  # エラーメッセージをログに出力
-    render :new, status: :unprocessable_entity
+    if @emergency_kit.save
+      # 保存に成功した場合
+      redirect_to stocks_emergency_kits_path, notice: 'Emergency kit was successfully created.'
+    else
+      # 保存に失敗した場合
+      render :new
+    end
   end
-end
-
   
   private
 

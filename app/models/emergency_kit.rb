@@ -7,9 +7,10 @@ class EmergencyKit < ApplicationRecord
 
   # 定期的にリマインダーを送信
   def self.send_reminders
-    # 定期的なリマインダーを送る
-    where("updated_at <= ?", Time.current - Reminder.pluck(:interval_months).first.months).find_each do |kit|
-      UserMailer.reminder_email(kit.user).deliver_later
+    # interval_months分経過したリマインダーを送信
+    Reminder.where('updated_at <= ?', Time.current - interval_months.months).find_each do |reminder|
+      # 対応するユーザーにリマインダーメールを送信
+      UserMailer.reminder_email(reminder.emergency_kit.user).deliver_later
     end
   end
 end
