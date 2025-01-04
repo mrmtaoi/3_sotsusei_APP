@@ -16,6 +16,8 @@
 /*BootstrapのSCSSファイルをインポート*/
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import 'header'; 
  
 /* ヘッダーの背景色をカスタマイズ */
 .navbar {

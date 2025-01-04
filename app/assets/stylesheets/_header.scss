@@ -8,16 +8,18 @@
   margin-right: 30px; /* 右の間隔を調整 */
   font-size: 2.5rem; /* フォントサイズを調整 */
   top: -30px; /* 上の余白 */
+  margin: 0px 30px; /* 各リストアイテムの左右の間隔を調整 */
 }
 
 .navbar-nav li a {
+  font-size: 2rem; /* フォントサイズを調整 */
   color: hwb(194 38% 3%); /* デフォルトの色を変更 */
   text-decoration: none; /* 下線を削除 */
   font-weight: 600;
 }
 
 .navbar-nav li a:hover {
-  color: rgb(242, 159, 91); /* ホバー時の色を変更（例: トマト色） */
+  color: rgb(242, 159, 91); /* ホバー時の色を変更 */
 }
 
 /* ナビゲーションメニュー */
@@ -26,8 +28,4 @@
   padding: 0; /* 内側の余白を削除 */
   margin: 0; /* 外側の余白を削除 */
   display: flex; /* 横並びにする */
-}
-
-.navbar-nav li {
-  margin: 0px 15px; /* 各リストアイテムの左右の間隔を調整（以前の20pxから少し狭くする） */
 }

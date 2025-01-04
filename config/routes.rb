@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'static_pages/top', to: 'static_pages#top'
   get 'static_pages/welcome', to: 'static_pages#welcome'
+  get 'stocks/emergency_kits/index', to: 'stocks#emergency_kits#new'
 
   namespace :stocks do
     resources :stocks

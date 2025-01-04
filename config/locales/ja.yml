@@ -1,0 +1,7 @@
+ja:
+  enums:
+    emergency_kits_owner:
+      gender:
+        male: "男"
+        female: "女"
+        other: "その他"

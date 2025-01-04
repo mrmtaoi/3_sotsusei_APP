@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_02_045141) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_04_033721) do
   create_table "emergency_kits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "owner_id", null: false
@@ -46,6 +46,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_02_045141) do
     t.datetime "updated_at", null: false
     t.index ["emergency_kit_id"], name: "index_kit_items_on_emergency_kit_id"
     t.index ["item_id"], name: "index_kit_items_on_item_id"
+  end
+
+  create_table "reminders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "kit_item_id"
+    t.bigint "stock_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "remind"
+    t.string "reminder"
+    t.integer "interval_months"
+    t.integer "emergency_kit_id"
+    t.index ["kit_item_id"], name: "index_reminders_on_kit_item_id"
+    t.index ["stock_item_id"], name: "index_reminders_on_stock_item_id"
+    t.index ["user_id", "kit_item_id", "stock_item_id"], name: "index_reminders_on_user_kit_stock", unique: true
+    t.index ["user_id"], name: "index_reminders_on_user_id"
   end
 
   create_table "stock_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -87,6 +103,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_02_045141) do
   add_foreign_key "emergency_kits_owners", "users"
   add_foreign_key "kit_items", "emergency_kits"
   add_foreign_key "kit_items", "items"
+  add_foreign_key "reminders", "kit_items"
+  add_foreign_key "reminders", "stock_items"
+  add_foreign_key "reminders", "users"
   add_foreign_key "stock_items", "items"
   add_foreign_key "stock_items", "stocks"
   add_foreign_key "stocks", "users"
