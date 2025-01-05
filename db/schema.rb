@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_04_033721) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_05_084040) do
   create_table "emergency_kits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "owner_id", null: false
@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_033721) do
     t.string "reminder"
     t.integer "interval_months"
     t.integer "emergency_kit_id"
+    t.integer "stock_id"
+    t.date "expiration_date"
     t.index ["kit_item_id"], name: "index_reminders_on_kit_item_id"
     t.index ["stock_item_id"], name: "index_reminders_on_stock_item_id"
     t.index ["user_id", "kit_item_id", "stock_item_id"], name: "index_reminders_on_user_kit_stock", unique: true
@@ -66,12 +68,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_033721) do
 
   create_table "stock_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "stock_id", null: false
-    t.bigint "item_id", null: false
     t.integer "quantity"
     t.string "storage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_stock_items_on_item_id"
+    t.string "stock_item_name"
     t.index ["stock_id"], name: "index_stock_items_on_stock_id"
   end
 
@@ -106,7 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_033721) do
   add_foreign_key "reminders", "kit_items"
   add_foreign_key "reminders", "stock_items"
   add_foreign_key "reminders", "users"
-  add_foreign_key "stock_items", "items"
   add_foreign_key "stock_items", "stocks"
   add_foreign_key "stocks", "users"
 end

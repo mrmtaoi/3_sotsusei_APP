@@ -20,7 +20,8 @@
 @import 'header'; 
 @import 'top'; 
 @import 'emergency_kits';
- 
+@import 'stocks';
+
 /* ヘッダーの背景色をカスタマイズ */
 .navbar {
   background-color: hwb(61 41% 2%) !important; /* ヘッダーの背景色を変更 */
@@ -32,4 +33,65 @@
   align-items: center; /* 垂直方向で中央揃え */
 }
 
+.inner_container {
+  position: absolute; /* 位置を絶対指定 */
+  top: 20%; /* top-wrapperの中での位置調整 */
+  left: 50%;
+  transform: translateX(-50%); /* 横方向で中央に配置 */
+  z-index: 1; /* 他の要素の上に表示 */
+  font-size: 5rem; /* 好きなサイズに変更 */
+  color: rgb(242, 159, 91);
+}
 
+.btn-secondary {
+  background-color: hwb(194 43% 3%) !important; /* ボタンの色 */
+  color: rgb(1, 1, 1) !important;
+}
+
+.btn-secondary:hover {
+  background-color: hwb(194 71% 4%) !important; /* ホバー時の色 */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important; /* ホバー時に影を強くして浮き上がらせる */
+  transform: translateY(-2px) !important; /* ボタンが少し浮き上がるようにする */
+}
+
+.btn-primary {
+  background-color: hwb(194 43% 3%) !important; /* ボタンの色 */
+  color: rgb(1, 1, 1) !important;
+}
+
+.btn-primary:hover {
+  background-color: hwb(194 71% 4%) !important; /* ホバー時の色 */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important; /* ホバー時に影を強くして浮き上がらせる */
+  transform: translateY(-2px) !important; /* ボタンが少し浮き上がるようにする */
+}
+
+.noitem {
+  position: absolute; /* 位置を絶対指定 */
+  top: 30%; /* top-wrapperの中での位置調整 */
+  left: 50%;
+  transform: translateX(-50%); /* 横方向で中央に配置 */
+  z-index: 1; /* 他の要素の上に表示 */
+  font-size: 3rem; /* 好きなサイズに変更 */
+  color: rgb(0, 0, 0);
+}
+
+.btn-noitem {
+  background-color: hwb(194 43% 3%) !important; /* ボタンの色 */
+  color: rgb(1, 1, 1) !important;
+}
+
+.btn-noitem:hover {
+  background-color: hwb(194 71% 4%) !important; /* ホバー時の色 */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important; /* ホバー時に影を強くして浮き上がらせる */
+  transform: translateY(-2px) !important; /* ボタンが少し浮き上がるようにする */
+}
+
+.inner_container-noitem {
+  position: absolute; /* 位置を絶対指定 */
+  top: 25%; /* top-wrapperの中での位置調整 */
+  left: 50%;
+  transform: translateX(-50%); /* 横方向で中央に配置 */
+  z-index: 1; /* 他の要素の上に表示 */
+  font-size: 5rem; /* 好きなサイズに変更 */
+  color: rgb(242, 159, 91);
+}

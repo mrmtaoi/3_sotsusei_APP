@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'static_pages/top', to: 'static_pages#top'
   get 'static_pages/welcome', to: 'static_pages#welcome'
   get 'stocks/emergency_kits/index', to: 'stocks#emergency_kits#new'
+  get 'stocks/stocks/index', to: 'stocks#stocks#new'
 
   namespace :stocks do
     resources :stocks
