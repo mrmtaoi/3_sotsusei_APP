@@ -25,12 +25,6 @@ def create
         gender: emergency_kit_params[:gender]
       )
 
-  # デバッグログ
-  logger.debug("EmergencyKitsOwner existence: #{EmergencyKitsOwner.exists?(id: owner.id)}")
-  logger.debug("Owner: #{owner.inspect}")
-  logger.debug("Gender: #{gender}")
-
-
     # EmergencyKit の作成
     @emergency_kit = EmergencyKit.new(
       user: user,
