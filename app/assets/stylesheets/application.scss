@@ -21,6 +21,7 @@
 @import 'top'; 
 @import 'emergency_kits';
 @import 'stocks';
+@import 'mypage';
 
 /* ヘッダーの背景色をカスタマイズ */
 .navbar {
@@ -35,11 +36,11 @@
 
 .inner_container {
   position: absolute; /* 位置を絶対指定 */
-  top: 20%; /* top-wrapperの中での位置調整 */
+  top: 20%; 
   left: 50%;
   transform: translateX(-50%); /* 横方向で中央に配置 */
   z-index: 1; /* 他の要素の上に表示 */
-  font-size: 5rem; /* 好きなサイズに変更 */
+  font-size: 5rem;
   color: rgb(242, 159, 91);
 }
 
@@ -76,6 +77,7 @@
 }
 
 .btn-noitem {
+  position: absolute; /* 位置を絶対指定 */
   background-color: hwb(194 43% 3%) !important; /* ボタンの色 */
   color: rgb(1, 1, 1) !important;
 }
@@ -88,8 +90,8 @@
 
 .inner_container-noitem {
   position: absolute; /* 位置を絶対指定 */
-  top: 25%; /* top-wrapperの中での位置調整 */
-  left: 50%;
+  top: 22%; /* top-wrapperの中での位置調整 */
+  left: 52%;
   transform: translateX(-50%); /* 横方向で中央に配置 */
   z-index: 1; /* 他の要素の上に表示 */
   font-size: 5rem; /* 好きなサイズに変更 */

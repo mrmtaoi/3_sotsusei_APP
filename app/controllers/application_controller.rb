@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
-  def top
-    if user_signed_in?
-    # ログイン後のトップページにリダイレクト
-      redirect_to static_pages_top_path and return
-    else
-    # ログイン前のトップページをレンダリング
-      render 'static_pages/welcome'
-    end
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    # サインアップ時にnameを許可
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+
+    # アカウント更新時にもnameを許可
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end
+
   

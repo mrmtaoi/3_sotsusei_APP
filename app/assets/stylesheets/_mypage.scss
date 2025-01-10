@@ -1,0 +1,20 @@
+.mypage_contents {
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  padding: 20px;
+  font-size: 4rem;
+  color: black;
+  position: absolute; /* 位置を絶対指定 */
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%); /* 横方向で中央に配置 */
+}
+
+.mypage_contents a { /* リンクの調整 */
+  color: black;
+  text-decoration: none;
+}
+
+.mypage_contents a:hover {
+  text-decoration: underline;
+}

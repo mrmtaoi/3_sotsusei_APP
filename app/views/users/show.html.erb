@@ -1,0 +1,8 @@
+<h1 class="page-title">マイページ</h1>
+<div class="mypage_contents">
+  <p>ユーザー名: <%= @user.name %></p>
+  <p>メールアドレス: <%= @user.email %></p>
+  <%= link_to 'ユーザー情報変更', edit_user_registration_path %>
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+  <%= link_to 'ユーザーアカウント削除', '#', data: { toggle: 'modal', target: '#deleteAccountModal' } %>
+</div>

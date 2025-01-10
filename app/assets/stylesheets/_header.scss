@@ -3,29 +3,20 @@
   top: -13px; /* 10px上に移動 */
 }
 
-.navbar-nav li {
+.header li {
   display: inline-block; /* 横並びにする */
-  margin-right: 30px; /* 右の間隔を調整 */
-  top: 0px; /* 上の余白 */
-  margin: 0px 15px; /* 各リストアイテムの左右の間隔を調整 */
+  margin: 30px 40px; /* 各リストアイテムの左右の間隔を調整 */
 }
 
-.navbar-nav li a {
-  font-size: 2.3rem; /* フォントサイズを調整 */
+.header li a {
+  font-size: 3.5rem; /* フォントサイズを調整 */
   color: hwb(194 38% 3%); /* デフォルトの色を変更 */
   text-decoration: none; /* 下線を削除 */
-  font-weight: 600;
-  top: -30px; /* 上の余白 */
+  font-weight: 550;
 }
 
-.navbar-nav li a:hover {
-  color: rgb(242, 159, 91); /* ホバー時の色を変更 */
+.header li a:hover {
+  color: hwb(194 71% 4%) ; /* ホバー時の色を変更 */
 }
 
-/* ナビゲーションメニュー */
-.navbar-nav {
-  list-style: none; /* リストの点を削除 */
-  padding: 0; /* 内側の余白を削除 */
-  margin: 0; /* 外側の余白を削除 */
-  display: flex; /* 横並びにする */
-}
+
