@@ -1,0 +1,13 @@
+<ul>
+  <% if @kit_items.present? %>
+    <% @kit_items.each do |kit_item| %>
+      <li>
+        <strong>アイテム:</strong> <%= kit_item.name %> |
+        <strong>数量:</strong> <%= kit_item.quantity %>
+      </li>
+    <% end %>
+  <% else %>
+    <p>No kit items available.</p>
+  <% end %>
+</ul>
+

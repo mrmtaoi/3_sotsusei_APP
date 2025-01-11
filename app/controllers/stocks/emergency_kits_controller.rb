@@ -4,8 +4,10 @@ class Stocks::EmergencyKitsController < ApplicationController
   end
 
   def show
-    # 必要なら処理を追加
-  end
+    @emergency_kit = EmergencyKit.find(params[:id])
+    @emergency_kits_owner = @emergency_kit.owner
+    @kit_items = @emergency_kit.kit_items # 関連するアイテムを取得
+  end  
 
   def new
     @emergency_kit = EmergencyKit.new
@@ -40,6 +42,10 @@ def create
       # 保存に失敗した場合
       render :new
     end
+  end
+
+  def edit
+    @emergency_kit = EmergencyKit.find(params[:id])
   end
   
   private

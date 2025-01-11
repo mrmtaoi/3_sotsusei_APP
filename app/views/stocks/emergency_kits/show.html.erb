@@ -1,4 +1,21 @@
-<h1>Emergency Kit Details</h1>
-<p><strong>Owner Name:</strong> <%= @emergency_kit.owner.name %></p>
-<p><strong>Storage:</strong> <%= @emergency_kit.storage %></p>
-<p><strong>Body:</strong> <%= @emergency_kit.body %></p>
+<h1>防災バッグの中身</h1>
+<p><strong>持ち主:</strong> <%= @emergency_kit.owner.name %></p>
+<p><strong>保管場所:</strong> <%= @emergency_kit.storage %></p>
+<%= @emergency_kit.body %></p>
+
+<%= render partial: 'stocks/kit_items/list', locals: { kit_items: @emergency_kit.kit_items } %>
+
+<h3>バックにアイテムを追加</h3>
+<%= form_with url: stocks_emergency_kit_kit_items_path(@emergency_kit), local: true do |form| %>
+    <div>
+      <%= form.label :アイテム名 %>
+      <%= form.text_field :name, name: 'kit_item[name]' %>
+    </div>
+    <div>
+      <%= form.label :数量 %>
+      <%= form.number_field :quantity, name: 'kit_item[quantity]' %>
+    </div>
+    <div>
+      <%= form.submit '追加する' %>
+    </div>
+  <% end %>
