@@ -1,4 +1,5 @@
-<h1>防災バッグの中身</h1>
+<h1 class="page-title">バッグのなかみ</h1>
+<div class="kit_item_list">
 <p><strong>持ち主:</strong> <%= @emergency_kit.owner.name %></p>
 <p><strong>保管場所:</strong> <%= @emergency_kit.storage %></p>
 <%= @emergency_kit.body %></p>
@@ -19,3 +20,4 @@
       <%= form.submit '追加する' %>
     </div>
   <% end %>
+</div>

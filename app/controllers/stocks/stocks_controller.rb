@@ -11,13 +11,13 @@ class Stocks::StocksController < ApplicationController
   def new
     @stock = Stock.new
     stock_item = @stock.stock_items.build
-    stock_item.reminders.build # Reminder を作成
+    stock_item.reminders.build
   end
 
   def create
     logger.debug "PARAMS: #{params.inspect}"
     @stock = Stock.new(stock_params)
-    @stock.user = current_user # 現在のユーザーを関連付ける
+    @stock.user = current_user
 
     if @stock.save
       redirect_to stocks_stocks_path, notice: '備蓄アイテムが登録されました。'
@@ -33,7 +33,7 @@ class Stocks::StocksController < ApplicationController
     params.require(:stock).permit(
       :body,
       stock_items_attributes: [
-        :quantity, :storage, :stock_item_name, # stock_item_name を許可
+        :quantity, :storage, :name,
         reminders_attributes: [:interval_months, :expiration_date] # reminder の属性を正しくネスト
       ]
     )

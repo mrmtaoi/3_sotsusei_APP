@@ -9,11 +9,10 @@
         <li>
           <div style="text-align: left;">
             <% stock.stock_items.each do |item| %>
-              <strong><%= item.stock_item_name %></strong>
+              <strong><%= item.name %></strong>
               <br>保管場所: <%= item.storage %>
             <% end %>
           </div>
-            <!-- ボタンの配置を変更 -->
             <div class="button-container3">
               <%= link_to "編集", edit_stocks_stock_path(stock), class: 'btn btn-secondary' %>
               <%= link_to "削除", stocks_stock_path(stock), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
