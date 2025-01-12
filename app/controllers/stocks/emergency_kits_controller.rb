@@ -3,6 +3,11 @@ class Stocks::EmergencyKitsController < ApplicationController
     @emergency_kits = EmergencyKit.where(user: current_user) # ユーザーの防災バッグを取得
   end
 
+  def all
+    @emergency_kits = EmergencyKit.where(user: current_user) # ユーザーの防災バッグ一覧を取得
+    @stocks = Stock.where(user: current_user) # ユーザーの備蓄一覧を取得
+  end
+
   def show
     @emergency_kit = EmergencyKit.find(params[:id])
     @emergency_kits_owner = @emergency_kit.owner

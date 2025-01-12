@@ -1,0 +1,11 @@
+.kit_item_list {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    padding: 20px;
+    font-size: 3rem;
+    color: black;
+    position: absolute; /* 位置を絶対指定 */
+    top: 30%;
+    left: 30%;
+    transform: translateX(-50%); /* 横方向で中央に配置 */
+}

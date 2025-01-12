@@ -22,6 +22,9 @@
 @import 'emergency_kits';
 @import 'stocks';
 @import 'mypage';
+@import 'kit_item_list'; 
+@import 'all'; 
+
 
 /* ヘッダーの背景色をカスタマイズ */
 .navbar {
@@ -95,5 +98,9 @@
   transform: translateX(-50%); /* 横方向で中央に配置 */
   z-index: 1; /* 他の要素の上に表示 */
   font-size: 5rem; /* 好きなサイズに変更 */
-  color: rgb(242, 159, 91);
+  color: rgb(0, 0, 0);
+}
+
+.button-container3 {
+  display: inline-block; /* 横並びにする */
 }
