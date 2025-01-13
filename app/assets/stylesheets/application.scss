@@ -25,7 +25,6 @@
 @import 'kit_item_list'; 
 @import 'all'; 
 
-
 /* ヘッダーの背景色をカスタマイズ */
 .navbar {
   background-color: hwb(61 41% 2%) !important; /* ヘッダーの背景色を変更 */
@@ -103,4 +102,5 @@
 
 .button-container3 {
   display: inline-block; /* 横並びにする */
+
 }

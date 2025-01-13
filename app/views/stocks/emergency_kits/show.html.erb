@@ -12,11 +12,20 @@
       <%= form.label :アイテム名 %>
       <%= form.text_field :name, name: 'kit_item[name]' %>
     </div>
+
     <div>
       <%= form.label :数量 %>
       <%= form.number_field :quantity, name: 'kit_item[quantity]' %>
     </div>
-    <div>
+
+    <div class="kit_item_remind">
+    <%= form.fields_for :reminders do |reminder_fields| %>
+      <%= reminder_fields.label :expiration_date, "期限", class: "form-label" %>
+      <%= reminder_fields.date_field :expiration_date, class: "form-control", autocomplete: "off" %>
+    <% end %>
+  </div>
+  
+
       <%= form.submit '追加する' %>
     </div>
   <% end %>

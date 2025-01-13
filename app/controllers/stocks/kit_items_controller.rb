@@ -1,12 +1,8 @@
 class Stocks::KitItemsController < ApplicationController
   before_action :set_emergency_kit
-  before_action :set_kit_item, only: [:edit, :update, :destroy]
-  
-  def index
-    # 該当する emergency_kit を取得
-    @emergency_kit = EmergencyKit.find(params[:emergency_kit_id])
+  before_action :set_kit_item, only: [:edit, :update, :show, :destroy]
 
-    # emergency_kit に関連する kit_items を取得
+  def index
     @kit_items = @emergency_kit.kit_items
   end
 
@@ -20,11 +16,11 @@ class Stocks::KitItemsController < ApplicationController
   end
   
   def edit
-  end
+  end  
   
   def update
     if @kit_item.update(kit_item_params)
-      redirect_to emergency_kit_path(@emergency_kit), notice: 'Kit item was successfully updated.'
+      redirect_to stocks_emergency_kit_path(@kit_item.emergency_kit), notice: 'アイテムが更新されました。'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -32,8 +28,12 @@ class Stocks::KitItemsController < ApplicationController
   
   def destroy
     @kit_item.destroy
-    redirect_to emergency_kit_path(@emergency_kit), notice: 'Kit item was successfully deleted.'
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@kit_item) }
+      format.html { redirect_to stocks_emergency_kit_path(@kit_item.emergency_kit), notice: "Item was successfully destroyed." }
+    end
   end
+  
   
   private
   
@@ -46,7 +46,6 @@ class Stocks::KitItemsController < ApplicationController
   end
   
   def kit_item_params
-    params.require(:kit_item).permit(:name, :quantity)
+    params.require(:kit_item).permit(:name, :quantity, reminders_attributes: [:expiration_date])
   end
 end
-  

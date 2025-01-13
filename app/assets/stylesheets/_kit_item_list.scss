@@ -1,11 +1,13 @@
 .kit_item_list {
-    display: flex;
-    flex-direction: column; /* 縦に並べる */
-    padding: 20px;
-    font-size: 3rem;
-    color: black;
-    position: absolute; /* 位置を絶対指定 */
-    top: 30%;
-    left: 30%;
-    transform: translateX(-50%); /* 横方向で中央に配置 */
+  top: 22%;
+  left: 35%;
+  margin-bottom: 30px; /* アイテム間の間隔を20pxに設定 */
+  list-style-type: none;
+}
+
+.kit_item_remind {
+  .form-control {
+    width: 150px; // 幅を短く設定
+    max-width: 100%; // 必要に応じて親要素に収まるよう調整
+  }
 }

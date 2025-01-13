@@ -1,4 +1,6 @@
 class Stocks::EmergencyKitsController < ApplicationController
+  before_action :set_emergency_kit, only: [:show, :edit, :update, :destroy]
+
   def index
     @emergency_kits = EmergencyKit.where(user: current_user) # ユーザーの防災バッグを取得
   end
@@ -9,9 +11,9 @@ class Stocks::EmergencyKitsController < ApplicationController
   end
 
   def show
-    @emergency_kit = EmergencyKit.find(params[:id])
+    # set_emergency_kit メソッドで既に @emergency_kit が設定されているため、再度 find は不要です
     @emergency_kits_owner = @emergency_kit.owner
-    @kit_items = @emergency_kit.kit_items # 関連するアイテムを取得
+    @kit_items = @emergency_kit.kit_items.includes(:reminders) # 関連するアイテムを取得
   end  
 
   def new
@@ -20,17 +22,17 @@ class Stocks::EmergencyKitsController < ApplicationController
     @emergency_kit.build_reminder # Reminder を初期化
   end
 
-def create
-  user = current_user
-  gender = EmergencyKitsOwner.genders.key(emergency_kit_params[:gender])
+  def create
+    user = current_user
+    gender = EmergencyKitsOwner.genders.key(emergency_kit_params[:gender])
 
-      # パラメータを使用してオーナー情報を取得または作成
-      owner = EmergencyKitsOwner.find_or_create_by(
-        user_id: current_user.id,
-        name: emergency_kit_params[:owner_name],
-        age: emergency_kit_params[:age],
-        gender: emergency_kit_params[:gender]
-      )
+    # パラメータを使用してオーナー情報を取得または作成
+    owner = EmergencyKitsOwner.find_or_create_by(
+      user_id: current_user.id,
+      name: emergency_kit_params[:owner_name],
+      age: emergency_kit_params[:age],
+      gender: emergency_kit_params[:gender]
+    )
 
     # EmergencyKit の作成
     @emergency_kit = EmergencyKit.new(
@@ -50,10 +52,25 @@ def create
   end
 
   def edit
-    @emergency_kit = EmergencyKit.find(params[:id])
+    # set_emergency_kit メソッドで既に @emergency_kit が設定されているため、再度 find は不要です
+  end
+
+  def destroy
+    # 関連する kit_items を削除
+    @emergency_kit.kit_items.destroy_all
+    
+    # EmergencyKit を削除
+    @emergency_kit.destroy
+    
+    redirect_to stocks_emergency_kits_path, notice: '防災バッグが削除されました。'
   end
   
+  
   private
+
+  def set_emergency_kit
+    @emergency_kit = EmergencyKit.find(params[:id])
+  end
 
   def emergency_kit_params
     params.require(:emergency_kit).permit(

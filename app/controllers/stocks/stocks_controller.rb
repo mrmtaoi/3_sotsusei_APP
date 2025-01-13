@@ -1,31 +1,50 @@
 class Stocks::StocksController < ApplicationController
+  before_action :set_stock, only: [:show, :edit, :update, :destroy]
+
   def index
-    @stocks = Stock.all
     @stocks = current_user.stocks
   end
 
-  def show
-    # showアクションは省略
+  def destroy
+    @stock.destroy
+    redirect_to stocks_stocks_path, notice: 'Stock was successfully destroyed.'
   end
 
   def new
     @stock = Stock.new
-    stock_item = @stock.stock_items.build
-    stock_item.reminders.build
+    # stock_items と reminders をビルド
+    @stock.stock_items.build.reminders.build
   end
 
   def create
-    logger.debug "PARAMS: #{params.inspect}"
     @stock = Stock.new(stock_params)
     @stock.user = current_user
 
     if @stock.save
       redirect_to stocks_stocks_path, notice: '備蓄アイテムが登録されました。'
     else
-      Rails.logger.debug @stock.errors.full_messages # エラー内容をログに出力
+      Rails.logger.debug @stock.errors.full_messages # デバッグ用: エラー内容をログに出力
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @stock = Stock.find(params[:id])
+    # stock_items と reminders がすでに存在していない場合のみビルド
+    @stock.stock_items.build if @stock.stock_items.empty?
+    @stock.stock_items.each do |stock_item|
+      stock_item.reminders.build if stock_item.reminders.empty?
+    end
+  end
+
+  def update
+    if @stock.update(stock_params)
+      redirect_to stocks_stocks_path, notice: 'アイテムが更新されました。'
+    else
+      Rails.logger.debug @stock.errors.full_messages # デバッグ用: エラー内容をログに出力
+      render :edit, status: :unprocessable_entity
+    end
+  end  
 
   private
 
@@ -33,9 +52,13 @@ class Stocks::StocksController < ApplicationController
     params.require(:stock).permit(
       :body,
       stock_items_attributes: [
-        :quantity, :storage, :name,
-        reminders_attributes: [:interval_months, :expiration_date] # reminder の属性を正しくネスト
+        :id, :name, :quantity, :storage, :_destroy,
+        reminders_attributes: [:id, :expiration_date, :interval_months, :_destroy]
       ]
     )
+  end  
+
+  def set_stock
+    @stock = Stock.find(params[:id])
   end
 end
